@@ -1,0 +1,5 @@
+<?php
+#PROPERTY
+class Model_#OBJECTNAME_#TABLENAMEInfo {
+#MODELINFO
+}

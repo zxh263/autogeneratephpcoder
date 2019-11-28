@@ -1,0 +1,104 @@
+﻿<?php
+/**
+ * #OBJECTNAME  RPC层
+ * 代码生成器生成
+ *
+ */
+class Rpc_#OBJECTNAME_#TABLENAME {
+	const CLASSID = #CLASSID; //修改为SoaServiceClass.config中对用的classid
+	/**
+	 * 根据ID获取信息
+	 * @param integer $intID
+	 * @return Model_#OBJECTNAME_#TABLENAMEInfo | NULL
+	 */
+	public static function GetByID($intID) {
+		$info = null;
+		$result = RpcService::getByIntJson ( self::CLASSID, "selectByPrimaryKey", ( int ) $intID );
+		if ($result != null) {
+			$info = self::ConvertInfo ( $result );
+		}
+		return $info;
+	}
+	/**
+	 * 添加
+	 * @param Model_#OBJECTNAME_#TABLENAMEInfo $Info
+	 */
+	public static function Insert($Info) {
+		RpcService::getFunction ( self::CLASSID, "insert", true, self::ConvertJson ( $Info ) );
+	}
+	/**
+	 *修改
+	 * @param Model_#OBJECTNAME_#TABLENAMEInfo $Info
+	 */
+	public static function Update($Info) {
+		RpcService::getFunction ( self::CLASSID, "update", true, self::ConvertJson ( $Info ) );
+	}
+	/**
+	 *删除信息 
+	 * @param integer $intID 
+	 */
+	public static function Delete($intID) {
+		RpcService::getByIntJson ( self::CLASSID, "delete", ( int ) $intID );
+	}
+	/**
+	 * 搜索
+	 * @param integer $AllCount 总条数
+	 * @param array $whereArr  查询条件
+	 * @return array Model_#OBJECTNAME_#TABLENAMEInfo[]
+	 */
+	public static function SearchByWhere($whereArr){
+		//$list=array();
+		//$jo=array();
+		//$jo["name"]=$key;
+		//$strParm = json_encode ( $jo );
+		$strParm = json_encode($whereArr); 
+		$result = RpcService::getFunction ( self::CLASSID, "selectByBean", true, $strParm );
+		if ($result != null) {
+			foreach ( $result as $item ) {
+				$list [] = self::ConvertInfo ( $item );
+			}
+		}
+		return $list;
+	}
+	/**
+	 * 搜索分页
+	 * @param integer $AllCount 总条数
+	 * @param integer $PageIndex 
+	 * @param integer $PageSize
+	 * @param array $whereArr 查询条件
+	 * @return array Model_#OBJECTNAME_#TABLENAMEInfo[]
+	 */
+	public static function SearchByWherePage(&$AllCount,$PageIndex,$PageSize,$whereArr){
+		//$jo = array();
+		//$jo['name'] = $key;
+		//$strParm = json_encode($jo);
+		$strParm = json_encode($whereArr);
+		$list = null;
+		$list = RpcService::getList(self::CLASSID, "selectByBean", $strParm, $PageIndex, $PageSize, $AllCount, "Model_#OBJECTNAME_#TABLENAMEInfo");
+		return $list;
+	}
+	/**
+	 * 生成json字符串 
+	 * @param Model_#OBJECTNAME_#TABLENAMEInfo $model 对象实体
+	 */
+	private  static function ConvertJson($model) {
+		$jo = array ();
+#JSONINFO
+		return json_encode ( $jo );
+	}
+	/**
+	 * 解析接口返回对象
+	 * @param obj $jobject
+	 * @return Model_#OBJECTNAME_#TABLENAMEInfo | NULL
+	 */
+	private  static function ConvertInfo($jobject) {
+		$Info = null;
+		if ($jobject == null) {
+			return null;
+		} else {
+			$Info = new Model_#OBJECTNAME_#TABLENAMEInfo ();
+#OBJINFO
+		}	
+		return $Info;
+	}
+}

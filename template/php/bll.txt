@@ -1,0 +1,61 @@
+﻿<?php
+/**
+ * #OBJECTNAME_#TABLENAME  业务层
+ * 代码生成器生成
+ *
+ */
+class Bll_#OBJECTNAME_#TABLENAME {
+	
+	/**
+	 * 根据ID获取信息
+	 * @param integer $intID
+	 * @return Model_#OBJECTNAME_#TABLENAMEInfo | NULL
+	 */
+	public static function GetByID($intID) {
+		return Rpc_#OBJECTNAME_#TABLENAME::GetByID ( $intID );
+	}
+	/**
+	 * 添加
+	 * @param Model_#OBJECTNAME_#TABLENAMEInfo $Info
+	 */
+	public static function Insert($Info) {
+		Rpc_#OBJECTNAME_#TABLENAME::Insert ( $Info );
+	}
+	/**
+	 *删除信息 
+	 * @param integer $intID 
+	 */
+	public static function Delete($intID) {
+		Rpc_#OBJECTNAME_#TABLENAME::Delete ( $intID );
+	}
+	/**
+	 *修改
+	 * @param Model_#OBJECTNAME_#TABLENAMEInfo $Info
+	 */
+	public static function Update($Info) {
+		Rpc_#OBJECTNAME_#TABLENAME::Update ( $Info );
+	}
+	/**
+	 * 搜索
+	 * @param integer $AllCount 总条数
+	 * @param array $whereArr 查询条件
+	 * @return array Model_#OBJECTNAME_#TABLENAMEInfo[]
+	 */
+	public static function SearchByWhere( $whereArr) {
+		$list = Rpc_#OBJECTNAME_#TABLENAME::SearchByWhere ( $whereArr);
+		return $list;
+	}
+	/**
+	 * 搜索分页
+	 * @param integer $AllCount 总条数
+	 * @param integer $PageIndex 
+	 * @param integer $PageSize
+	 * @param array $whereArr 查询条件
+	 * @return array Model_#OBJECTNAME_#TABLENAMEInfo[]
+	 */
+	public static function SearchByWherePage(&$AllCount, $PageIndex, $PageSize, $whereArr) {
+		$list = Rpc_#OBJECTNAME_#TABLENAME::SearchByWherePage ( $AllCount, $PageIndex, $PageSize, $whereArr);
+		return $list;
+	}
+
+}
