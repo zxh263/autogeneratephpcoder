@@ -1,0 +1,86 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+namespace {$namespace}
+{
+    public class {$classname}
+    {
+	    private static readonly int CLASSID = 99999;
+        
+		public string Convert2Json(Model.{$classname} model)
+        {
+            JObject jo = new JObject();
+            JProperty jp = null;
+
+            if (model.{$primary} > 0)
+            {
+				{$primaryjson}
+            }
+			{$generaljson}
+            return JsonConvert.SerializeObject(jo);
+        }
+
+		public Model.{$classname} GetModel({$primarykey})
+		{
+            string result = Mainone.Common.RpcService.GetFunction(CLASSID, "selectByPrimaryKey", false, {$primary_args}.ToString());
+            JObject jo = JsonConvert.DeserializeObject<JObject>(result);
+            if (jo != null && jo["result"] != null)
+            {
+                return Mainone.Common.RpcService.ConvertInfo<Model.{$classname}>(jo);
+            }
+            return null;
+		}
+
+        public int Insert(Model.{$classname} model)
+		{
+            string json = Convert2Json(model);
+            string result= Mainone.Common.RpcService.GetFunction(CLASSID, "insert", true, json);
+			int val = 0;
+            JObject jo = JsonConvert.DeserializeObject(result) as JObject;
+            if (jo != null)
+            {
+              val = Mainone.Common.RpcService.ConvertInt(jo);
+            }
+			return val;
+		}
+
+        public int Update(Model.{$classname} model)
+		{
+		    string json = Convert2Json(model);
+            string result = Mainone.Common.RpcService.GetFunction(CLASSID, "update", true, json);
+			int val = 0;
+            JObject jo = JsonConvert.DeserializeObject(result) as JObject;
+            if (jo != null)
+            {
+              val = Mainone.Common.RpcService.ConvertInt(jo);
+            }
+			return val;
+		}
+
+        public int Delete({$primarykey})
+		{
+            string result = Mainone.Common.RpcService.GetFunction(CLASSID, "delete", false, {$primary_args}.ToString());
+			int val = 0;
+            JObject jo = JsonConvert.DeserializeObject(result) as JObject;
+            if (jo != null)
+            {
+              val = Mainone.Common.RpcService.ConvertInt(jo);
+            }
+			return val;
+		}
+
+        public IList<Model.{$classname}> GetList(Model.{$classname} model,int pageIndex,int pageSize,out int recordCount)
+		{
+            JObject jo = new JObject();
+            JProperty jp = null;
+
+			{$search_json}
+            string json = JsonConvert.SerializeObject(jo);
+            return Mainone.Common.RpcService.GetList<Model.{$classname}>(CLASSID,"selectByBean", json, pageIndex, pageSize, out recordCount);
+		}
+    }
+}

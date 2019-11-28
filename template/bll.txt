@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+namespace {$namespace}
+{
+    public class {$classname}
+    {
+		private static {$namespacedal}.{$classname} _dal = new {$namespacedal}.{$classname}();
+
+		public static Model.{$classname} GetModel({$primarykey})
+		{
+            if({$primary_args} >0 )
+			{
+				return _dal.GetModel({$primary_args});
+			}
+            return null;
+		}
+
+        public static int Insert(Model.{$classname} model)
+		{
+			if(model!=null)
+			{
+				return _dal.Insert(model);
+			}
+			return -1;
+		}
+
+        public static int Update(Model.{$classname} model)
+		{
+			if(model!=null)
+			{
+				return _dal.Update(model);
+			}
+			return -1;
+		}
+
+        public static int Delete({$primarykey})
+		{
+            if({$primary_args} >0 )
+			{
+				return _dal.Delete({$primary_args});
+			}
+            return -1;
+		}
+
+        public static IList<Model.{$classname}> GetList(Model.{$classname} model,int pageIndex,int pageSize,out int recordCount)
+		{
+			recordCount =0;
+
+			if(model!=null)
+			{
+				return _dal.GetList(model,pageIndex,pageSize,out recordCount);
+			}
+			return null;
+		}
+    }
+}

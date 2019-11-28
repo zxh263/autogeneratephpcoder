@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace {$namespace}
+{
+		
+		[Serializable]
+		public class {$classname}
+		{
+
+		#region 内部成员变量
+        {$member}
+        #endregion
+		
+		{$public}
+
+		}
+}

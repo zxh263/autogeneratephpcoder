@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace {$namespace}
+{
+    public interface I{$classname}
+    {
+        #region
+        int Insert(Model.{$classname} model);
+        int Update(Model.{$classname} model);
+        int Delete({$primarykey});
+        IList<{$classname}> GetList(Model.{$classname} model,int pageIndex,int pageSize,out int recordCount);
+        #endregion
+    }
+}
